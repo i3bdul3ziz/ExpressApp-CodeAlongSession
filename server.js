@@ -69,6 +69,26 @@ app.post('/api/person', function(req, res){
 // Homework
 // Please write update API and delete API.
 
+// Update Route
+app.get("/api/updatePerson/", function(req, res){
+    res.render("../app/views/updatePerson.ejs", {data:people})
+})
+
+app.post('/api/updatedPerson', function(req, res){
+    people[req.body.index].firstName = req.body.firstName
+    people[req.body.index].lastName = req.body.lastName
+    res.render('../app/views/people.ejs', {data: people})
+})
+
+// Delete Route
+app.get("/api/deletePerson/", function(req, res){
+    res.render("../app/views/deletePerson.ejs", {data:people})
+})
+
+app.post('/api/deletedPerson', function(req, res){
+    people.splice(req.body.index,1)
+    res.render('../app/views/people.ejs', {data: people})
+})
 
 // configuration of port
 const port = process.env.PORT || 3000;
